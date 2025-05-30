@@ -20,6 +20,9 @@ Fulfills the “Java Application” requirement: it’s a standalone client that
 
 
 
+
+
+
 sari-sari = is the Web server + Front-end, fulfilling both the “Webserver” and “Webpage” parts of the spec.
 
 
