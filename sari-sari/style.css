@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #a49e9e;
+  margin: 0; padding: 0;
+}
+header {
+  background: #4c56c9;
+  color: #d6d6d6;
+  text-align: center;
+  padding: 1rem;
+}
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.empty {
+  text-align: center;
+  font-size: 1.2rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1rem;
+}
+.card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.price {
+  font-weight: bold;
+  margin-top: .5rem;
+}
+
+.card {
+  position: relative;  /* make absolute children position relative to the card */
+}
+
+
+.product-id {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: #ff0000;
+  padding: 2px 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+
+
+
+.card .description {
+  font-style: italic;
+}
