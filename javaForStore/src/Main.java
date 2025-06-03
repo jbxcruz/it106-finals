@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class Main {
     public static void main(String[] args) {
         ApiClient apiClient = new ApiClient();
@@ -16,12 +18,17 @@ public class Main {
 
             int choice = readInt(scanner, "Choose an option: ");
 
+
+
+
             try {
                 switch (choice) {
+
                     case 1:
                         List<Product> products = apiClient.getProducts();
                         products.forEach(System.out::println);
                         break;
+
                     case 2:
                         System.out.print("Enter product name: ");
                         String name = scanner.nextLine();
@@ -34,6 +41,7 @@ public class Main {
                         Product newProduct = new Product(0, name, desc, price);
                         apiClient.addProduct(newProduct);
                         break;
+
                     case 3:
                         int updateId = readInt(scanner, "Enter ID of product to update: ");
 
@@ -48,14 +56,17 @@ public class Main {
                         Product updatedProduct = new Product(updateId, newName, newDesc, newPrice);
                         apiClient.updateProduct(updatedProduct);
                         break;
+
                     case 4:
                         int deleteId = readInt(scanner, "Enter ID of product to delete: ");
                         apiClient.deleteProduct(deleteId);
                         break;
+
                     case 5:
                         System.out.println("Goodbye!");
                         scanner.close();
                         return;
+                        
                     default:
                         System.out.println("Invalid choice. Please enter a number 1–5.");
                 }
@@ -64,6 +75,8 @@ public class Main {
             }
         }
     }
+
+
 
     // Reads an integer from the user, re-prompting on invalid input
     private static int readInt(Scanner sc, String prompt) {
@@ -77,6 +90,8 @@ public class Main {
             }
         }
     }
+
+
 
     // Reads a double from the user, re-prompting on invalid input
     private static double readDouble(Scanner sc, String prompt) {
