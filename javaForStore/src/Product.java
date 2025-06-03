@@ -4,16 +4,21 @@ public class Product {
     private String description;
     private double price;
 
+
     // No-arg constructor (required for Gson)
     public Product() {}
 
-    // Full constructor (optional)
+
+
+    // Full constructor (opt.)
     public Product(int id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
+
+
 
     // Getters & setters
     public int getId() { return id; }
