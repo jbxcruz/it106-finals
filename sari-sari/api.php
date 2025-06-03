@@ -10,10 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 
+
+
 include 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
 
+
+
 switch ($method) {
+
+    
     case 'GET':
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
@@ -38,6 +44,10 @@ switch ($method) {
         }
         break;
 
+
+
+
+        
     case 'POST':
         $data = json_decode(file_get_contents('php://input'), true);
         if (!empty($data['name']) && !empty($data['description']) && isset($data['price'])) {
@@ -58,6 +68,10 @@ switch ($method) {
         }
         break;
 
+
+
+
+
     case 'PUT':
         $data = json_decode(file_get_contents('php://input'), true);
         if (!empty($data['id']) && !empty($data['name']) && !empty($data['description']) && isset($data['price'])) {
@@ -70,30 +84,45 @@ switch ($method) {
                 $data['price'],
                 $data['id']
             );
-            $ok = $stmt->execute();
-            echo json_encode(["success"=>$ok]);
-            $stmt->close();
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            echo json_encode(["success" => true]);
+        } else {
+            http_response_code(400);
+            echo json_encode(["success" => false, "error" => "ID not found"]);
+        }
+        $stmt->close();
+
         } else {
             http_response_code(400);
             echo json_encode(["success"=>false,"error"=>"Missing fields"]);
         }
         break;
 
-    case 'DELETE':
-        // Decode JSON from request body
-        $data = json_decode(file_get_contents("php://input"), true);
 
-        if (!empty($data['id'])) {
-            $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
-            $stmt->bind_param("i", $data['id']);
-            $ok = $stmt->execute();
-            echo json_encode(["success" => $ok]);
-            $stmt->close();
-        } else {
-            http_response_code(400);
-            echo json_encode(["success" => false, "error" => "Missing id"]);
-        }
-        break;
+
+
+        // Example for api.php DELETE branch
+        case 'DELETE':
+            $data = json_decode(file_get_contents("php://input"), true);
+            if (!empty($data['id'])) {
+                $stmt = $conn->prepare("DELETE FROM products WHERE id=?");
+                $stmt->bind_param("i", $data['id']);
+                $stmt->execute();
+                if ($stmt->affected_rows > 0) {
+                    echo json_encode(["success" => true]);
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["success" => false, "error" => "ID not found"]);
+                }
+                $stmt->close();
+            } else {
+                http_response_code(400);
+                echo json_encode(["success" => false, "error" => "Missing id"]);
+            }
+            break;
+
+
 
 
 
